@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07060a" />
+    <meta
+      name="description"
+      content="Umbra — an interactive solar eclipse, seen through smoked obsidian."
+    />
+    <title>Umbra — an occultation</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <a class="skip-link visually-hidden" href="#controls">Skip to controls</a>
+    <canvas id="stage" aria-hidden="true"></canvas>
+    <div id="announce" class="visually-hidden" aria-live="polite"></div>
+
+    <div class="curtain" id="curtain" aria-hidden="true">
+      <p class="curtain-mark">Umbra</p>
+      <p class="curtain-sub">Look through the plate</p>
+    </div>
+
+    <div class="fail" id="fail" hidden aria-hidden="true">
+      <p>This viewing plate needs WebGL2.</p>
+    </div>
+
+    <header class="mast">
+      <p class="mark">Umbra</p>
+      <p class="mark-sub">an occultation</p>
+    </header>
+
+    <main id="content" class="overlay">
+      <section class="caption" aria-labelledby="phase-title">
+        <h1 id="phase-title">First contact</h1>
+        <p id="phase-verse" class="verse">Night takes a first, precise bite.</p>
+      </section>
+
+      <aside class="telemetry" aria-label="Eclipse telemetry">
+        <div>
+          <span class="k">Magnitude</span>
+          <span class="v" id="read-mag">1.04</span>
+        </div>
+        <div>
+          <span class="k">Obscuration</span>
+          <span class="v" id="read-cov">0%</span>
+        </div>
+        <div>
+          <span class="k">Kind</span>
+          <span class="v" id="read-kind">Total</span>
+        </div>
+        <div>
+          <span class="k">Contact</span>
+          <span class="v" id="read-contact">C1</span>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="dock" id="controls">
+      <div class="dock-row">
+        <button type="button" id="btn-play" aria-pressed="true">
+          <span class="visually-hidden">Pause</span>
+          <span aria-hidden="true" class="icon-pause">∥</span>
+        </button>
+
+        <label class="slider progress-slider">
+          <span class="visually-hidden" id="progress-label">Eclipse progress</span>
+          <input
+            id="progress"
+            type="range"
+            min="0"
+            max="1000"
+            value="260"
+            aria-labelledby="progress-label"
+          />
+          <span class="contacts" aria-hidden="true">
+            <i data-c="c1">C1</i>
+            <i data-c="c2">C2</i>
+            <i data-c="c3">C3</i>
+            <i data-c="c4">C4</i>
+          </span>
+        </label>
+
+        <button type="button" id="btn-plate" aria-pressed="true">
+          Plate
+        </button>
+      </div>
+
+      <div class="dock-row secondary">
+        <label class="slider">
+          <span>Lunar distance</span>
+          <input
+            id="distance"
+            type="range"
+            min="0"
+            max="1000"
+            value="870"
+            aria-valuetext="Total eclipse"
+          />
+        </label>
+        <label class="slider">
+          <span>Path offset</span>
+          <input id="impact" type="range" min="0" max="1000" value="512" />
+        </label>
+      </div>
+
+      <p class="hint">
+        Drag the sky to scrub · space to play · the plate unveils only in totality
+      </p>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
